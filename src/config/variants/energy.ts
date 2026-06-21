@@ -18,7 +18,7 @@ export * from './base';
 export const DEFAULT_PANELS: Record<string, PanelConfig> = {
   // Core
   map: { name: 'Energy & Infrastructure Map', enabled: true, priority: 1 },
-  'live-news': { name: 'Energy Headlines', enabled: true, priority: 1 },
+  'live-news': { name: 'Energy Headlines', enabled: false, priority: 1 },
   // Energy complex — existing panels we reuse in Week 1
   'energy-complex': { name: 'Oil & Gas Complex', enabled: true, priority: 1 },
   'oil-inventories': { name: 'Oil & Gas Inventories', enabled: true, priority: 1 },

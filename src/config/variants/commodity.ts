@@ -16,7 +16,7 @@ export { MINING_SITES, PROCESSING_PLANTS, COMMODITY_PORTS } from '@/config/commo
 export const DEFAULT_PANELS: Record<string, PanelConfig> = {
   // Core
   map: { name: 'Commodity & Mining Map', enabled: true, priority: 1 },
-  'live-news': { name: 'Commodity Headlines', enabled: true, priority: 1 },
+  'live-news': { name: 'Commodity Headlines', enabled: false, priority: 1 },
   // Markets
   markets: { name: 'Mining & Commodity Stocks', enabled: true, priority: 1 },
   commodities: { name: 'Live Commodity Prices', enabled: true, priority: 1 },

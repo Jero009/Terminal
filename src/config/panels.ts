@@ -16,7 +16,7 @@ const _desktop = isDesktopRuntime();
 // Desired order: live-news, AI Insights, AI Strategic Posture, cii, strategic-risk, then rest
 const FULL_PANELS: Record<string, PanelConfig> = {
   map: { name: 'Global Map', enabled: true, priority: 1 },
-  'live-news': { name: 'Live News', enabled: true, priority: 1 },
+  'live-news': { name: 'Live News', enabled: false, priority: 1 },
   'live-webcams': { name: 'Live Webcams', enabled: true, priority: 1 },
   'windy-webcams': { name: 'Windy Live Webcam', enabled: false, priority: 2 },
   insights: { name: 'AI Insights', enabled: true, priority: 1 },
@@ -254,7 +254,7 @@ const FULL_MOBILE_MAP_LAYERS: MapLayers = {
 // ============================================
 const TECH_PANELS: Record<string, PanelConfig> = {
   map: { name: 'Global Tech Map', enabled: true, priority: 1 },
-  'live-news': { name: 'Tech Headlines', enabled: true, priority: 1 },
+  'live-news': { name: 'Tech Headlines', enabled: false, priority: 1 },
   'live-webcams': { name: 'Live Webcams', enabled: true, priority: 2 },
   'windy-webcams': { name: 'Windy Live Webcam', enabled: false, priority: 2 },
   insights: { name: 'AI Insights', enabled: true, priority: 1 },
@@ -424,7 +424,7 @@ const TECH_MOBILE_MAP_LAYERS: MapLayers = {
 // ============================================
 const FINANCE_PANELS: Record<string, PanelConfig> = {
   map: { name: 'Global Markets Map', enabled: true, priority: 1 },
-  'live-news': { name: 'Market Headlines', enabled: true, priority: 1 },
+  'live-news': { name: 'Market Headlines', enabled: false, priority: 1 },
   'live-webcams': { name: 'Live Webcams', enabled: true, priority: 2 },
   'windy-webcams': { name: 'Windy Live Webcam', enabled: false, priority: 2 },
   insights: { name: 'AI Market Insights', enabled: true, priority: 1 },
@@ -762,7 +762,7 @@ const HAPPY_MOBILE_MAP_LAYERS: MapLayers = {
 // ============================================
 const COMMODITY_PANELS: Record<string, PanelConfig> = {
   map: { name: 'Commodity Map', enabled: true, priority: 1 },
-  'live-news': { name: 'Commodity Headlines', enabled: true, priority: 1 },
+  'live-news': { name: 'Commodity Headlines', enabled: false, priority: 1 },
   insights: { name: 'AI Commodity Insights', enabled: true, priority: 1 },
   'commodity-news': { name: 'Commodity News', enabled: true, priority: 1 },
   'liquidity-shifts': { name: 'Liquidity Shifts', enabled: true, priority: 1 },
@@ -937,7 +937,7 @@ const ENERGY_PANELS: Record<string, PanelConfig> = {
   'storage-facility-map': { name: 'Strategic Storage Atlas', enabled: true, priority: 1 },
   'fuel-shortages': { name: 'Global Fuel Shortage Registry', enabled: true, priority: 1 },
   'energy-disruptions': { name: 'Energy Disruptions Log', enabled: true, priority: 1 },
-  'live-news': { name: 'Energy Headlines', enabled: true, priority: 1 },
+  'live-news': { name: 'Energy Headlines', enabled: false, priority: 1 },
   insights: { name: 'AI Energy Insights', enabled: true, priority: 1 },
   // Energy complex — existing panels reused at launch
   'energy-complex': { name: 'Oil & Gas Complex', enabled: true, priority: 1 },
