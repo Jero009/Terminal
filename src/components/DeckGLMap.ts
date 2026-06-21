@@ -900,6 +900,59 @@ export class DeckGLMap {
     } catch { /* ignore */ }
   }
 
+  // --- NASA GIBS satellite imagery overlay ---------------------------------
+  // Free, key-less true-color tiles (VIIRS). Unlike the backend-fed imagery
+  // footprints, this works standalone. Mirrors the RainViewer raster pattern
+  // but is a STATIC tile URL (no fetch/refresh), so a single idempotent
+  // reconcile from updateLayers() is enough.
+  private addSatelliteOverlay(): void {
+    if (!this.maplibreMap) return;
+    try {
+      if (!this.maplibreMap.isStyleLoaded()) {
+        this.maplibreMap.once('idle', () => this.syncSatelliteOverlay());
+        return;
+      }
+      if (this.maplibreMap.getLayer('gibs-satellite-layer')) return;
+      // GIBS often lacks same-day imagery; use yesterday (UTC). REST axis order is {z}/{y}/{x}.
+      const date = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString().slice(0, 10);
+      this.maplibreMap.addSource('gibs-satellite', {
+        type: 'raster',
+        tiles: [
+          `https://gibs.earthdata.nasa.gov/wmts/epsg3857/best/VIIRS_SNPP_CorrectedReflectance_TrueColor/default/${date}/GoogleMapsCompatible_Level9/{z}/{y}/{x}.jpg`,
+        ],
+        tileSize: 256,
+        maxzoom: 9,
+        attribution: '© NASA GIBS / Worldview',
+      });
+      // Insert beneath the first symbol (label) layer so place labels stay
+      // legible over the opaque imagery; fills/lines below are covered (the
+      // expected satellite look). Deck.gl data layers ride above via the overlay.
+      const firstSymbol = this.maplibreMap.getStyle().layers?.find((l) => l.type === 'symbol')?.id;
+      this.maplibreMap.addLayer({
+        id: 'gibs-satellite-layer',
+        type: 'raster',
+        source: 'gibs-satellite',
+        paint: { 'raster-opacity': 0.92 },
+      }, firstSymbol);
+    } catch (err) { console.warn('[DeckGLMap] satellite overlay add failed:', (err as Error)?.message); }
+  }
+
+  private removeSatelliteOverlay(): void {
+    if (!this.maplibreMap) return;
+    try {
+      if (this.maplibreMap.getLayer('gibs-satellite-layer')) this.maplibreMap.removeLayer('gibs-satellite-layer');
+      if (this.maplibreMap.getSource('gibs-satellite')) this.maplibreMap.removeSource('gibs-satellite');
+    } catch { /* ignore */ }
+  }
+
+  private syncSatelliteOverlay(): void {
+    if (!this.maplibreMap) return;
+    const want = !!this.state.layers.satellites;
+    const have = !!this.maplibreMap.getLayer('gibs-satellite-layer');
+    if (want && !have) this.addSatelliteOverlay();
+    else if (!want && have) this.removeSatelliteOverlay();
+  }
+
   private setupDOM(): void {
     const wrapper = document.createElement('div');
     wrapper.className = 'deckgl-map-wrapper';
@@ -5640,6 +5693,7 @@ export class DeckGLMap {
 
   private updateLayers(): void {
     if (this.renderPaused || this.webglLost || !this.maplibreMap) return;
+    this.syncSatelliteOverlay();
     const startTime = performance.now();
     try {
       this.deckOverlay?.setProps({ layers: this.buildLayers() });
@@ -7399,6 +7453,7 @@ export class DeckGLMap {
     this.stopPulseAnimation();
     this.stopDayNightTimer();
     this.stopWeatherRadar();
+    this.removeSatelliteOverlay();
     if (this.aircraftFetchTimer) {
       clearInterval(this.aircraftFetchTimer);
       this.aircraftFetchTimer = null;
