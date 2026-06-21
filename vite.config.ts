@@ -617,6 +617,8 @@ const RSS_PROXY_ALLOWED_DOMAINS = new Set([
   'www.occrp.org', 'dfrlab.org', 'www.lighthousereports.com', 'thesentry.org', 'globalinitiative.net', 'vsquare.org', 'correctiv.org',
   // Croatian feeds
   'n1info.hr', 'www.index.hr', 'www.jutarnji.hr', 'balkaninsight.com',
+  // Slovenian / Adria feeds
+  'www.rtvslo.si', 'www.24ur.com', 'rss.orf.at',
   // Finance variant
   'www.coindesk.com', 'cointelegraph.com',
   // Happy variant — positive news sources

@@ -239,6 +239,13 @@ const FULL_FEEDS: Record<string, Feed[]> = {
       }
     },
     { name: 'DW News', url: { en: rss('https://rss.dw.com/xml/rss-en-all'), de: rss('https://rss.dw.com/xml/rss-de-all'), es: rss('https://news.google.com/rss/search?q=site:dw.com/es&hl=es-419&gl=MX&ceid=MX:es-419') } },
+    // Slovenia & Adria region (added for Slovenia/Europe focus)
+    { name: 'RTV SLO', url: rss('https://news.google.com/rss/search?q=site:rtvslo.si+when:1d&hl=sl&gl=SI&ceid=SI:sl') },
+    { name: '24ur', url: rss('https://www.24ur.com/rss') },
+    { name: 'STA Slovenia', url: rss('https://news.google.com/rss/search?q=site:sta.si+OR+Slovenia+when:1d&hl=en-SI&gl=SI&ceid=SI:en') },
+    { name: 'The Slovenia Times', url: rss('https://news.google.com/rss/search?q=site:sloveniatimes.com+when:7d&hl=en-SI&gl=SI&ceid=SI:en') },
+    { name: 'ORF Austria', url: rss('https://rss.orf.at/news.xml') },
+    { name: 'Croatia Headlines', url: rss('https://news.google.com/rss/search?q=Croatia+when:1d&hl=en-HR&gl=HR&ceid=HR:en') },
     // Spanish (ES)
     { name: 'El País', url: rss('https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/portada'), lang: 'es' },
     { name: 'El Mundo', url: rss('https://e00-elmundo.uecdn.es/elmundo/rss/portada.xml'), lang: 'es' },

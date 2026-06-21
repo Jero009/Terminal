@@ -337,5 +337,8 @@ export default [
   "n1info.hr",
   "www.index.hr",
   "www.jutarnji.hr",
-  "balkaninsight.com"
+  "balkaninsight.com",
+  "www.rtvslo.si",
+  "www.24ur.com",
+  "rss.orf.at"
 ];
